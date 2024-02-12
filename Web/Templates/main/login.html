@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #eceff1;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: #5c6bc0;
+            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 23px;
+        }
+
+        main {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 23px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 2px solid #5c6bc0;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #7e57c2;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #5c6bc0;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #7e57c2;
+        }
+
+        .error {
+            color: #ff0000;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .register-link a {
+            color: #5c6bc0;
+            text-decoration: none;
+            transition: color 0.3s;
+            margin-top: 10px;
+        }
+
+        .register-link a:hover {
+            color: #7e57c2;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo-and-title">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 50px; vertical-align: middle;">
+            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWork
+                shop</h1>
+            <nav style="text-align: right; display: inline-block;">
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Log in</h1>
+            {% if message %}
+            <div style="text-align: center; color: red;">
+                <p class="error">{{ message }}</p>
+                {% if "Username or password is incorrect." in message %}
+                {% endif %}
+                {% else %}
+                <form method="post" action="{{ url_for('login') }}">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="button-container">
+                        <input type="submit" value="Continue">
+                    </div>
+                    {% endif %}
+                    <h4>Don't have an account? <a href="{{ url_for('register') }}"
+                            style="text-decoration: underline;">Sign up</a>.</h4>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

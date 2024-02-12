@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-and-title">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 50px; vertical-align: middle;">
+            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWork
+                shop</h1>
+            <nav style="text-align: right; display: inline-block;">
+        </div>
+        <ul class="inline-buttons">
+            <div class="cart-and-logout">
+                <a href="{{ url_for('cart') }}">
+                    <img src="/static/images/cart-icon.png" alt="Giỏ hàng" class="cart-icon">
+                </a>
+                <form method="post" action="{{ url_for('logout') }}">
+                    <button type="submit">Log out</button>
+                </form>
+            </div>
+            <div class="recommended-button">
+                <form method="post" action="{{ url_for('recommendations', customer_id=username) }}">
+                    <button type="submit">Recommended for you</button>
+                </form>
+            </div>
+        </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2 style="font-size: 29px;">Welcome, {{ username }}!</h2>
+            <div class="product-listing">
+                {% for product in products %}
+                <div class="product-item">
+                    <img src="/static/images/product{{ loop.index }}.jpg" alt="Sản phẩm {{ loop.index }}">
+                    <h4>
+                        <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
+                    </h4>
+                    <p>Price: {{ product['price'] }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact us: nckh@gmail.com</p>
+        <p>Copyright © 2023</p>
+    </footer>
+</body>
+
+</html>

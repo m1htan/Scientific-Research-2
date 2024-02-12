@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #eceff1;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: #5c6bc0;
+            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 23px;
+        }
+
+        main {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 23px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #5c6bc0;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="phone"],
+        input[type="full_name"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 2px solid #5c6bc0;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="phone"]:focus,
+        input[type="full_name"]:focus {
+            border-color: #5c6bc0;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #5c6bc0;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #7e57c2;
+        }
+
+        .message {
+            color: #5c6bc0;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .login-link a {
+            color: #5c6bc0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .login-link a:hover {
+            color: #7e57c2;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo-and-title">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 50px; vertical-align: middle;">
+            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWork
+                shop</h1>
+            <nav style="text-align: right; display: inline-block;">
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Sign up</h1>
+            {% if message %}
+            <p class="message">{{ message }}</p>
+            {% endif %}
+            <form method="post" action="{{ url_for('register') }}">
+                <label for="full_name">Full name:</label>
+                <input type="text" id="full_name" name="full_name" required>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+                <label for="phone">Phone number:</label>
+                <input type="text" id="phone" name="phone" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" required>
+                <input type="submit" value="Submit">
+            </form>
+            <h4>Already have an account? <a href="{{ url_for('login') }}" style="text-decoration: underline;">Log
+                    in</a>.
+            </h4>
+        </div>
+    </main>
+</body>
+
+</html>

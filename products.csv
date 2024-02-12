@@ -1,0 +1,40 @@
+﻿id;ProductID;ProductNumber;name;price;image
+1;879;ST-1401;All-Purpose Bike Stand;59,466;/static/images/product1.jpg
+2;712;CA-1098;AWC Logo Cap;6,9223;/static/images/product2.jpg
+3;877;CL-9009;Bike Wash - Dissolver;2,9733;/static/images/product3.jpg
+4;843;LO-C100;Cable Lock;10,3125;/static/images/product4.jpg
+5;864;VE-C304;Classic Vest;23,749;/static/images/product5.jpg
+6;878;FE-6654;Fender Set - Mountain;8,2205;/static/images/product6.jpg
+7;861;GL-F110;Full-Finger Gloves;15,6709;/static/images/product7.jpg
+8;858;GL-H102;Half-Finger Gloves;9,1593;/static/images/product8.jpg
+9;847;LT-H902;Headlights - Dual-Beam;14,4334;/static/images/product9.jpg
+10;848;LT-H903;Headlights - Weatherproof;18,5584;/static/images/product10.jpg
+11;876;RA-H123;Hitch Rack - 4-Bike;44,88;/static/images/product11.jpg
+12;930;TI-M823;HL Mountain Tire;13,09;/static/images/product12.jpg
+13;933;TI-R982;HL Road Tire;12,1924;/static/images/product13.jpg
+14;880;HY-1023;Hydration Pack - 70 oz.;20,5663;/static/images/product14.jpg
+15;928;TI-M267;LL Mountain Tire;9,3463;/static/images/product15.jpg
+16;931;TI-R092;LL Road Tire;8,0373;/static/images/product16.jpg
+17;713;LJ-0192;Long-Sleeve Logo Jersey;38,4923;/static/images/product17.jpg
+18;855;SB-M891;Men's Bib-Shorts;37,1209;/static/images/product18.jpg
+19;841;SH-M897;Men's Sports Shorts;24,7459;/static/images/product19.jpg
+20;844;PU-0452;Minipump;8,2459;/static/images/product20.jpg
+21;929;TI-M602;ML Mountain Tire;11,2163;/static/images/product21.jpg
+22;932;TI-R628;ML Road Tire;9,3463;/static/images/product22.jpg
+23;709;SO-B909;Mountain Bike Socks;3,3963;/static/images/product23.jpg
+24;871;BC-M005;Mountain Bottle Cage;3,7363;/static/images/product24.jpg
+25;845;PU-M044;Mountain Pump;10,3084;/static/images/product25.jpg
+26;921;TT-M928;Mountain Tire Tube;1,8663;/static/images/product26.jpg
+27;873;PK-7098;Patch Kit/8 Patches;0,8565;/static/images/product27.jpg
+28;874;SO-R809;Racing Socks;3,3623;/static/images/product28.jpg
+29;872;BC-R205;Road Bottle Cage;3,3623;/static/images/product29.jpg
+30;922;TT-R982;Road Tire Tube;1,4923;/static/images/product30.jpg
+31;881;SJ-0194;Short-Sleeve Classic Jersey;41,5723;/static/images/product31.jpg
+32;707;HL-U509;Sport-100 Helmet;13,0863;/static/images/product32.jpg
+33;846;LT-T990;Taillights - Battery-Powered;5,7709;/static/images/product33.jpg
+34;934;TI-T723;Touring Tire;10,8423;/static/images/product34.jpg
+35;923;TT-T092;Touring Tire Tube;1,8663;/static/images/product35.jpg
+36;842;PA-T100;Touring-Panniers;51,5625;/static/images/product36.jpg
+37;870;WB-H098;Water Bottle - 30 oz.;1,8663;/static/images/product37.jpg
+38;867;SH-W890;Women's Mountain Shorts;26,1763;/static/images/product38.jpg
+39;852;TG-W091;Women's Tights;30,9334;/static/images/product39.jpg

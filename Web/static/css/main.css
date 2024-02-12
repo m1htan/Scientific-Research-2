@@ -1,0 +1,110 @@
+body {
+    text-align: center;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+header,
+main,
+footer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 23px;
+}
+
+header,
+footer {
+    background-color: #f8f9fa;
+}
+
+header {
+    text-align: left;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+}
+
+header img,
+header h1 {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 0px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-right: 10px;
+}
+
+.logo-and-title {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.logo-and-title h1 {
+    margin: 0 0 0 -10px;
+    font-size: 29.3px;
+}
+
+.cart-and-logout {
+    display: flex;
+    align-items: center;
+}
+
+.inline-buttons {
+    display: inline;
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+    align-items: center;
+    margin: 0px 5px;
+    display: block;
+}
+
+.cart-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.product-listing {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.product-item {
+    flex-basis: calc(15% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.product-item:hover {
+    background-color: #c9c9c9;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.product-item img {
+    width: 100%;
+    /* Đảm bảo hình ảnh trải dài theo chiều rộng của khung */
+    height: 200px;
+    /* Thiết lập chiều cao cố định */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh không bị méo mà vẫn phủ đầy khung */
+    border-bottom: 1px solid #eee;
+}

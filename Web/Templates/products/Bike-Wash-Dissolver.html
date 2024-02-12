@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Trang thông tin sản phẩm</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-and-title">
+            <img id="logo" src="/static/images/logo.png" alt="Logo" style="height: 50px; vertical-align: middle;">
+            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWork
+                shop</h1>
+            <nav style="text-align: right; display: inline-block;">
+        </div>
+        <ul class="inline-buttons">
+            <ul class="inline-buttons">
+                <div class="cart-and-logout">
+                    <a href="{{ url_for('cart') }}">
+                        <img src="/static/images/cart-icon.png" alt="Giỏ hàng" class="cart-icon">
+                    </a>
+    </header>
+    <main>
+        <div class="product-container">
+            <!-- Image Gallery -->
+            <div class="product-gallery">
+                <img id="main-image" src="/static/images/product3.jpg" alt="All-Purpose-Bike-Stand">
+                <!-- Thumbnails or arrows to click through images -->
+                <!-- Add JavaScript to change the main image on click -->
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-details">
+                <h1 class="product-name">Bike Wash - Dissolver</h1>
+                <p class="price">$2,9733</p>
+                <p class="description">Zui lắm mua dề chơi đi...</p>
+
+                <!-- Size Selection -->
+                <div class="product-selection">
+                    <div class="quantity-selector">
+                        <label for="quantity">Quantity:</label>
+                        <button class="quantity-btn decrease" onclick="decreaseQuantity('quantity')">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <button class="quantity-btn increase" onclick="increaseQuantity('quantity')">+</button>
+                    </div>
+                </div>
+                <!-- Quantity and Add to Cart -->
+                <div class="cart-actions">
+                    <button onclick="addToCart(3)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Contact us: nckh@gmail.com</p>
+        <p>Copyright © 2023</p>
+    </footer>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
