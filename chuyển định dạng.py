@@ -1,4 +1,3 @@
-# Đầu tiên, hãy đọc nội dung của file CSV để xem dữ liệu trông như thế nào
 import pandas as pd
 
 # Đọc file
