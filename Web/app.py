@@ -125,8 +125,8 @@ def get_recommended_products():
             for row in csv_reader:
                 # Giả sử mỗi hàng chứa thông tin của một sản phẩm
                 product_info = {
-                    'product_id': int(row['product_id']),
-                    'product_name': row['product_name'],
+                    'id': int(row['id']),
+                    'name': row['name'],
                     'price': row['price']  # Giả sử có cột giá sản phẩm
                 }
                 products_info.append(product_info)
@@ -375,10 +375,21 @@ customer_templates= {
 
 @app.route('/recommendations/<int:customer_id>', methods=['GET', 'POST'])
 def recommendations(customer_id):
-    username = session.get('username')
-    customer_id=session.get('username')
-    products_info=get_recommended_products(customer_id)
-    return render_template('/recommendations/30118.html', customer_id=customer_id, username=username, products_info=products_info)
+    products_info = get_product_recommendation(customer_id)  # Giả sử bạn đã sửa hàm này để trả về danh sách sản phẩm
+    template_name = customer_templates.get(customer_id)
+    if template_name:
+        return render_template(template_name, products_info=products_info)
+    else:
+        return "Customer not found!", 404
+
+def get_product_recommendation(product_id):
+    # Gọi hàm để lấy danh sách sản phẩm đề xuất
+    products_info = get_recommended_products()
+    # Duyệt qua danh sách sản phẩm để tìm sản phẩm có ID tương ứng
+    for product_info in products_info:
+        if product_info.get('id') == str(product_id):  # So sánh ID sản phẩm
+            return product_info
+    return None  # Trả về None nếu không tìm thấy sản phẩm với ID tương ứng
 
 @app.route('/product/product<int:product_id>')
 def product_detail(product_id):

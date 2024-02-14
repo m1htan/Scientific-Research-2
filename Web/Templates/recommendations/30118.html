@@ -32,15 +32,15 @@
         <section>
             <h2 style="font-size: 29px;">Recommended for you</h2>
             <div class="product-listing">
-                {% for products_info in get_recommended_products %}
+                {% for product in products_info %}
                 <div class="product-item">
                     <img src="/static/images/product{{ loop.index }}.jpg" alt="Sản phẩm {{ loop.index }}">
                     <h4>
-                        <a href="{{ url_for('product_detail', product_id=products_info['id']) }}">{{ products_info['name'] }}</a>
+                        <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
                     </h4>
-                    <p>Price: {{ products_info['price'] }}</p>
+                    <p>Price: {{ product['price'] }}</p>
                 </div>
-                {% endfor %}
+                {% endfor %}                
             </div>
         </section>
     </main>
