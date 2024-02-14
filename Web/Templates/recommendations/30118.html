@@ -13,9 +13,8 @@
     <header>
         <div class="logo-and-title">
             <img src="/static/images/logo.png" alt="Logo" style="height: 50px; vertical-align: middle;">
-            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWork
-                shop</h1>
-            <nav style="text-align: right; display: inline-block;">
+            <h1 style="text-align: left; padding-left: 20px; display: inline-block; font-size: 29.3px">AdventureWorkshop
+            </h1>
         </div>
         <ul class="inline-buttons">
             <div class="cart-and-logout">
@@ -32,18 +31,21 @@
         <section>
             <h2 style="font-size: 29px;">Recommended for you</h2>
             <div class="product-listing">
-                {% for product in products_info %}
-                <div class="product-item">
-                    <img src="/static/images/product{{ loop.index }}.jpg" alt="Sản phẩm {{ loop.index }}">
-                    <h4>
-                        <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
-                    </h4>
-                    <p>Price: {{ product['price'] }}</p>
-                </div>
-                {% endfor %}                
+                {% if products_info %}
+                    {% for product in products_info %}
+                    <li>
+                        <h2>{{ product['name'] }}</h2>
+                        <p>Price: {{ product['price'] }}</p>
+                        <img src="/static/images/{{ product['image'] }}" alt="{{ product['name'] }}" width="100">
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No recommendations available at this moment.</p>
+                {% endif %}
             </div>
         </section>
-    </main>
+    </main>    
+    
     <footer>
         <p>Contact us: nckh@gmail.com</p>
         <p>Copyright © 2023</p>

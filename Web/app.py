@@ -71,7 +71,6 @@ def load_products():
         with open('products.csv', 'r', newline='', encoding='utf-8-sig') as file:
             reader = csv.DictReader(file, delimiter=';')
             for row in reader:
-                # Xử lý giá cả 
                 if 'price' in row:
                     row['price'] = row['price'].replace(',', '.')
                     row['price'] = '$' + row['price']
@@ -109,7 +108,7 @@ def save_recommended_items(customer_id, recommended_items):
     csv_file_path = 'recommended_items.csv'
     
     # Mở file để ghi (thêm dữ liệu) với chế độ 'a'
-    with open(csv_file_path, 'a', newline='', encoding='utf-8') as file:
+    with open(csv_file_path, 'a', newline='', encoding='utf-8-sig') as file:
         writer = csv.writer(file)
         # Kiểm tra xem file đã có dữ liệu chưa để viết tiêu đề cột
         if file.tell() == 0:
@@ -117,21 +116,27 @@ def save_recommended_items(customer_id, recommended_items):
         # Ghi thông tin khách hàng và sản phẩm đề xuất vào file
         writer.writerow([customer_id, ','.join(map(str, recommended_items))])
 
+def get_product_recommendation(product_id):
+    # Gọi hàm để lấy danh sách sản phẩm đề xuất
+    products_info = get_recommended_products()
+    # Duyệt qua danh sách sản phẩm để tìm sản phẩm có ID tương ứng
+    for product_info in products_info:
+        if product_info.get('id') == str(product_id):  # So sánh ID sản phẩm
+            return product_info
+    return None  # Trả về None nếu không tìm thấy sản phẩm với ID tương ứng
+
 def get_recommended_products():
     products_info = []
-    try:
-        with open('E:/Bài tập Python/z_Gợi ý sản phẩm/z_Scientific-Research-main/recommended_item.csv', mode='r', encoding='utf-8') as file:
-            csv_reader = csv.DictReader(file)
-            for row in csv_reader:
-                # Giả sử mỗi hàng chứa thông tin của một sản phẩm
-                product_info = {
-                    'id': int(row['id']),
-                    'name': row['name'],
-                    'price': row['price']  # Giả sử có cột giá sản phẩm
-                }
-                products_info.append(product_info)
-    except FileNotFoundError:
-        print("File recommended_item.csv not found.")
+    with open('E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv', 'r', newline='', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            product_info = {
+                'id': int(row['recommended_product_ids']),  # Lấy id sản phẩm và chuyển đổi sang kiểu int
+                'name': row['name'],   # Lấy tên sản phẩm
+                'price': row['price'],  # Lấy giá sản phẩm
+                'image': row['image']   # Lấy đường dẫn hình ảnh sản phẩm
+            }
+            products_info.append(product_info)
     return products_info
 
 def load_data():
@@ -278,17 +283,7 @@ def dashboard():
     if not username:
         # Chuyển hướng người dùng về trang đăng nhập nếu không tìm thấy username trong session
         return redirect(url_for('login'))
-    
-    customer_id = int(username)  # Giả sử username được lưu trữ là customer_id dưới dạng số
-    recommended_products_ids = get_recommended_products()
-    
-    # Lấy thông tin chi tiết sản phẩm từ ID đề xuất
-    recommended_products = []
-    for product_id in recommended_products_ids:
-        product = get_product_by_id(product_id)  # Giả sử bạn đã có hàm này để lấy thông tin sản phẩm từ ID
-        if product:
-            recommended_products.append(product)
-    return render_template('/main/dashboard.html', products=products, username=username, recommended_products=recommended_products)
+    return render_template('/main/dashboard.html', products=products, username=username)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -375,27 +370,26 @@ customer_templates= {
 
 @app.route('/recommendations/<int:customer_id>', methods=['GET', 'POST'])
 def recommendations(customer_id):
-    products_info = get_product_recommendation(customer_id)  # Giả sử bạn đã sửa hàm này để trả về danh sách sản phẩm
+    products_info = get_product_recommendation(customer_id)
     template_name = customer_templates.get(customer_id)
     if template_name:
+        # Kiểm tra nếu products_info là None, thì cung cấp một danh sách rỗng
+        if products_info is None:
+            print('Emty')
+            products_info = []
         return render_template(template_name, products_info=products_info)
     else:
         return "Customer not found!", 404
-
-def get_product_recommendation(product_id):
-    # Gọi hàm để lấy danh sách sản phẩm đề xuất
-    products_info = get_recommended_products()
-    # Duyệt qua danh sách sản phẩm để tìm sản phẩm có ID tương ứng
-    for product_info in products_info:
-        if product_info.get('id') == str(product_id):  # So sánh ID sản phẩm
-            return product_info
-    return None  # Trả về None nếu không tìm thấy sản phẩm với ID tương ứng
 
 @app.route('/product/product<int:product_id>')
 def product_detail(product_id):
     template_name = product_templates.get(product_id)
     if template_name:
-        return render_template(template_name)
+        product = get_product_by_id(product_id)
+        if product:
+            return render_template(template_name, product=product)
+        else:
+            return "Product not found!", 404    
     else:
         return "Product not found!", 404
 
