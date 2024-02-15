@@ -125,18 +125,19 @@ def get_product_recommendation(product_id):
             return product_info
     return None  # Trả về None nếu không tìm thấy sản phẩm với ID tương ứng
 
-def get_recommended_products():
+def get_recommended_products(customer_id):
     products_info = []
     with open('E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv', 'r', newline='', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            product_info = {
-                'id': int(row['recommended_product_ids']),  # Lấy id sản phẩm và chuyển đổi sang kiểu int
-                'name': row['name'],   # Lấy tên sản phẩm
-                'price': row['price'],  # Lấy giá sản phẩm
-                'image': row['image']   # Lấy đường dẫn hình ảnh sản phẩm
-            }
-            products_info.append(product_info)
+            if int(row['customer_id']) == customer_id:  # Kiểm tra xem dòng này có phải là sản phẩm đề xuất cho customer_id không
+                product_info = {
+                    'id': int(row['recommended_product_ids']),
+                    'name': row['name'],
+                    'price': row['price'],
+                    'image': row['image']
+                }
+                products_info.append(product_info)
     return products_info
 
 def load_data():
@@ -370,13 +371,9 @@ customer_templates= {
 
 @app.route('/recommendations/<int:customer_id>', methods=['GET', 'POST'])
 def recommendations(customer_id):
-    products_info = get_product_recommendation(customer_id)
+    products_info = get_recommended_products(customer_id)
     template_name = customer_templates.get(customer_id)
     if template_name:
-        # Kiểm tra nếu products_info là None, thì cung cấp một danh sách rỗng
-        if products_info is None:
-            print('Emty')
-            products_info = []
         return render_template(template_name, products_info=products_info)
     else:
         return "Customer not found!", 404
