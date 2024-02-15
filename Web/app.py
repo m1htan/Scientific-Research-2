@@ -116,6 +116,21 @@ def save_recommended_items(customer_id, recommended_items):
         # Ghi thông tin khách hàng và sản phẩm đề xuất vào file
         writer.writerow([customer_id, ','.join(map(str, recommended_items))])
 
+def get_recommended_products(customer_id):
+    products_info = []
+    with open('E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv', 'r', newline='', encoding='utf-8-sig') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if int(row['customer_id']) == customer_id:
+                product_info = {
+                    'id': int(row['id']),
+                    'name': row['name'],
+                    'price': row['price'],
+                    'image': row['image']
+                }
+                products_info.append(product_info)
+    return products_info
+
 def get_product_recommendation(product_id):
     # Gọi hàm để lấy danh sách sản phẩm đề xuất
     products_info = get_recommended_products()
@@ -123,22 +138,7 @@ def get_product_recommendation(product_id):
     for product_info in products_info:
         if product_info.get('id') == str(product_id):  # So sánh ID sản phẩm
             return product_info
-    return None  # Trả về None nếu không tìm thấy sản phẩm với ID tương ứng
-
-def get_recommended_products(customer_id):
-    products_info = []
-    with open('E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv', 'r', newline='', encoding='utf-8-sig') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            if int(row['customer_id']) == customer_id:  # Kiểm tra xem dòng này có phải là sản phẩm đề xuất cho customer_id không
-                product_info = {
-                    'id': int(row['recommended_product_ids']),
-                    'name': row['name'],
-                    'price': row['price'],
-                    'image': row['image']
-                }
-                products_info.append(product_info)
-    return products_info
+    return None 
 
 def load_data():
     train_df = pd.read_csv('E:/Bài tập Python/z_Gợi ý sản phẩm/train.csv')

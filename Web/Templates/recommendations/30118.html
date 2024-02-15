@@ -135,13 +135,14 @@ li {
             </div>
         </ul>
     </header>
+    
     <main>
         <section>
             <h2 style="font-size: 29px;">Recommended for you</h2>
             <div class="product-listing">
                 {% if products_info %}
                     {% for product in products_info %}
-                    <img src="{{ product['image'] }}" alt="Sản phẩm {{ loop.index }}">
+                    <img src="{{ product['image'] }}" alt="Sản phẩm {{ product['image'] }}">
                     <h4>
                         <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
                     </h4>
