@@ -27,13 +27,13 @@
                 </form>
             </div>
             <div class="recommended-button">
-                {% if customer_id in customer_templates %}
+                {% if username == '30118' %}   
                     <form method="post" action="{{ url_for('recommendations', customer_id=username) }}">
                         <button type="submit">Recommended for you</button>
                     </form>
                 {% else %}
                     <form method="post" action="{{ url_for('new_customer_recommendations', username=username) }}">
-                        <button type="submit">Recommended for you</button>
+                        <button type="submit">Recommended for you.</button>
                     </form>
                 {% endif %}
             </div>

@@ -376,15 +376,18 @@ new_customer_templates= {
 @app.route('/recommendations/<int:customer_id>', methods=['GET', 'POST'])
 def recommendations(customer_id):
     products_info = get_recommended_products(customer_id)
+    username = session.get('username')
     template_name = customer_templates.get(customer_id)
     if template_name:
-        return render_template(template_name, products_info=products_info)
+        return render_template(template_name, products_info=products_info, username=username)
     else:
         return redirect(url_for('new_customer_recommendations'))
 
 @app.route('/new_customer_recommendations/<int:username>', methods=['GET', 'POST'])
 def new_customer_recommendations(username):
-    return render_template('recommendations/new_customer_recommendations.html', username=username)
+    products = load_products()
+    productss = products[1:9]
+    return render_template('recommendations/new_customer_recommendations.html', username=username, productss=productss)
 
 @app.route('/product/product<int:product_id>')
 def product_detail(product_id):

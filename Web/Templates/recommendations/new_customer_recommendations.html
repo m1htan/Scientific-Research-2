@@ -33,9 +33,9 @@
         <section>
             <h2 style="font-size: 29px;">Best seller you may like</h2>
             <div class="product-listing">
-                {% for product in products %}
+                {% for product in productss %}
                 <div class="product-item">
-                    <img src="/static/images/product{{ loop.index }}.jpg" alt="Sản phẩm {{ loop.index }}">
+                    <img src="{{ product['image'] }}" alt="Product Image">
                     <h4>
                         <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
                     </h4>
