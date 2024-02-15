@@ -369,6 +369,10 @@ customer_templates= {
     30118:'/recommendations/30118.html'
 }
 
+new_customer_templates= {
+    123:'/new_customer_recommendations/123.html'
+}
+
 @app.route('/recommendations/<int:customer_id>', methods=['GET', 'POST'])
 def recommendations(customer_id):
     products_info = get_recommended_products(customer_id)
@@ -376,7 +380,11 @@ def recommendations(customer_id):
     if template_name:
         return render_template(template_name, products_info=products_info)
     else:
-        return "Customer not found!", 404
+        return redirect(url_for('new_customer_recommendations'))
+
+@app.route('/new_customer_recommendations/<int:username>', methods=['GET', 'POST'])
+def new_customer_recommendations(username):
+    return render_template('recommendations/new_customer_recommendations.html', username=username)
 
 @app.route('/product/product<int:product_id>')
 def product_detail(product_id):

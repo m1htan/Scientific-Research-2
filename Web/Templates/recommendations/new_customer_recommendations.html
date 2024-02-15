@@ -26,24 +26,12 @@
                     <button type="submit">Log out</button>
                 </form>
             </div>
-            <div class="recommended-button">
-                {% if customer_id in customer_templates %}
-                    <form method="post" action="{{ url_for('recommendations', customer_id=username) }}">
-                        <button type="submit">Recommended for you</button>
-                    </form>
-                {% else %}
-                    <form method="post" action="{{ url_for('new_customer_recommendations', username=username) }}">
-                        <button type="submit">Recommended for you</button>
-                    </form>
-                {% endif %}
-            </div>
         </ul>
         </nav>
     </header>
-
     <main>
         <section>
-            <h2 style="font-size: 29px;">Welcome, {{ username }}!</h2>
+            <h2 style="font-size: 29px;">Best seller you may like</h2>
             <div class="product-listing">
                 {% for product in products %}
                 <div class="product-item">
@@ -57,7 +45,6 @@
             </div>
         </section>
     </main>
-
     <footer>
         <p>Contact us: nckh@gmail.com</p>
         <p>Copyright © 2023</p>
