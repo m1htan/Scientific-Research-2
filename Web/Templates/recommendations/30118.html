@@ -90,7 +90,7 @@ li {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 20px;
+    gap: 40px;
     margin: 20px auto;
 }
 
@@ -142,18 +142,18 @@ li {
             <div class="product-listing">
                 {% if products_info %}
                     {% for product in products_info %}
-                    <img src="{{ product['image'] }}" alt="Sản phẩm {{ product['image'] }}">
-                    <h4>
-                        <a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a>
-                    </h4>
-                        <p>Price: {{ product['price'] }}</p>
+                        <div class="product-item">
+                            <img src="{{ product['image'] }}" alt="Product Image">
+                            <h4><a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['name'] }}</a></h4>
+                            <p>Price: {{ product['price'] }}</p>
+                        </div>
                     {% endfor %}
                 {% else %}
                     <p>No recommendations available at this moment.</p>
                 {% endif %}
             </div>
         </section>
-    </main>    
+    </main>  
     
     <footer>
         <p>Contact us: nckh@gmail.com</p>
