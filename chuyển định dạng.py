@@ -1,31 +1,40 @@
-import pandas as pd
+import csv
 
-# Đọc file
-file_path = 'E:/Bài tập Python/z_Scientific-Research-main/recommended_items.csv'
-data = pd.read_csv(file_path)
+# Đọc dữ liệu từ file products.csv và lưu vào một dictionary
+products = {}
+with open('E:/Bài tập Python/test/products.csv', mode='r', encoding='utf-8') as file:
+    reader = csv.DictReader(file, delimiter=';')
+    for row in reader:
+        products[row['ProductID']] = {
+            'name': row['name'],
+            'price': row['price'],
+            'image': row['image'],
+            'id': row['ProductID']
+        }
 
-# Tách cột dữ liệu thành hai phần dựa vào dấu phẩy đầu tiên
-split_data = data['customer_id'].str.split(',', n=1, expand=True)
+# Đọc dữ liệu từ file recommended_items.csv và chuyển đổi định dạng
+with open('E:/Bài tập Python/test/recommended_items.csv', mode='r', encoding='utf-8') as input_file:
+    with open('rec2.csv', mode='w', encoding='utf-8', newline='') as output_file:
+        fieldnames = ['customer_id', 'recommended_product_ids', 'id', 'name', 'price', 'image']
+        writer = csv.DictWriter(output_file, fieldnames=fieldnames)
+        writer.writeheader()
 
-# Gán lại tên cột cho phù hợp
-split_data.columns = ['customer_id', 'recommended_product_ids']
+        reader = csv.reader(input_file)
+        for row in reader:
+            if len(row) >= 2:  # Kiểm tra xem hàng có ít nhất 2 phần tử không
+                customer_id = row[0].strip('"')
+                recommended_product_ids = row[1].strip('"').split(',')
 
-# Xử lý chuỗi 'recommended_product_ids' để loại bỏ dấu ngoặc kép
-split_data['recommended_product_ids'] = split_data['recommended_product_ids'].str.replace('"', '')
+                for product_id in recommended_product_ids:
+                    product = products.get(product_id.strip())
+                    if product:
+                        writer.writerow({
+                            'customer_id': customer_id,
+                            'recommended_product_ids': product_id.strip(),
+                            'id': product['id'],
+                            'name': product['name'],
+                            'price': product['price'],
+                            'image': product['image']
+                        })
 
-# Tạo danh sách rỗng để lưu dữ liệu sau khi tách
-recommended_item = []
-
-# Duyệt qua mỗi hàng trong dữ liệu
-for index, row in split_data.iterrows():
-    # Tách các recommended_product_id bằng dấu phẩy
-    product_ids = row['recommended_product_ids'].split(',')
-    # Đối với mỗi product_id, thêm vào danh sách với customer_id tương ứng
-    for product_id in product_ids:
-        recommended_item.append({'customer_id': row['customer_id'], 'recommended_product_id': product_id})
-
-# Chuyển danh sách thành DataFrame
-expanded_data = pd.DataFrame(recommended_item)
-
-new_file_path = 'E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv'
-expanded_data.to_csv(new_file_path, index=True)
+print("Chuyen doi du lieu thanh cong. File rec2.csv da duoc tao.")

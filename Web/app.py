@@ -118,7 +118,7 @@ def save_recommended_items(customer_id, recommended_items):
 
 def get_recommended_products(customer_id):
     products_info = []
-    with open('E:/Bài tập Python/z_Scientific-Research-main/recommended_item.csv', 'r', newline='', encoding='utf-8-sig') as file:
+    with open('E:/Bài tập Python/rec3.csv', 'r', newline='', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
             if int(row['customer_id']) == customer_id:
